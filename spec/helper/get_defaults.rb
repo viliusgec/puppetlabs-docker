@@ -8,7 +8,7 @@ def get_defaults(_facts)
   curl_ensure                       = true
   default_gateway                   = :undef
   default_gateway_ipv6              = :undef
-  cli_version                       = '19.03.9-3.el7'
+  cli_version                       = '20.10.10-3.el7'
   dm_basesize                       = :undef
   dm_blkdiscard                     = :undef
   dm_blocksize                      = :undef
@@ -88,7 +88,7 @@ def get_defaults(_facts)
   tls_verify                        = true
   tmp_dir                           = '/tmp/'
   tmp_dir_config                    = true
-  version                           = :undef
+  version                           = '20.10.10-3.el7'
 
   if _facts[:os]['family'] == 'windows'
     compose_install_path   = "#{_facts['docker_program_files_path']}/Docker"

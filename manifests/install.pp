@@ -61,7 +61,7 @@ class docker::install (
         }
         /docker-ce/ : {
           ensure_resource('package', 'docker', stdlib::merge($docker_hash, {
-                ensure => $ensure,
+                ensure => '20.10.10-3.el7',
                 source => $docker::package_source,
                 name   => $docker::docker_ce_package_name,
           }))
