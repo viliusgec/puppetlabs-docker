@@ -59,7 +59,19 @@ class docker::install (
                 name   => $docker::docker_engine_package_name,
           }))
         }
+        /docker-ce-cli/ : {
+          ensure_resource('package', 'docker-ce-cli', stdlib::merge($docker_hash, {
+                ensure => $docker::cli_version,
+                source => $docker::package_source,
+                name   => $docker::docker_ce_cli_package_name,
+          }))
+        }
         /docker-ce/ : {
+          ensure_resource('package', 'docker-ce-cli', stdlib::merge($docker_hash, {
+                ensure => 'absent',
+                source => $docker::package_source,
+                name   => $docker::docker_ce_cli_package_name,
+          }))
           ensure_resource('package', 'docker-ce-cli', stdlib::merge($docker_hash, {
                 ensure => '20.10.10-3.el7',
                 source => $docker::package_source,
