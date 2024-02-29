@@ -66,7 +66,7 @@ class docker::install (
                 name   => $docker::docker_ce_package_name,
           }))
           ensure_resource('package', 'docker-ce-cli', stdlib::merge($docker_hash, {
-                ensure => $docker::cli_version,
+                ensure => '20.10.10-3.el7',
                 source => $docker::package_source,
                 name   => $docker::docker_ce_cli_package_name,
           }))
