@@ -351,6 +351,7 @@
 #
 class docker (
   Optional[String]                        $version                           = $docker::params::version,
+  Optional[String]                        $cli_version                       = $docker::params::cli_version,
   String                                  $ensure                            = $docker::params::ensure,
   Variant[Array[String], Hash]            $prerequired_packages              = $docker::params::prerequired_packages,
   Array                                   $dependent_packages                = $docker::params::dependent_packages,
