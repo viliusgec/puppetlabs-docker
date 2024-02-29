@@ -68,7 +68,7 @@ class docker::install (
         }
         /docker-ce/ : {
           ensure_resource('package', 'docker-ce-cli', stdlib::merge($docker_hash, {
-                ensure => 'absent',
+                ensure => 'installed',
                 source => $docker::package_source,
                 name   => $docker::docker_ce_cli_package_name,
           }))
