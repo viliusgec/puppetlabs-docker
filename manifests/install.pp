@@ -35,7 +35,7 @@ class docker::install (
     }
   }
   if $docker::version and $docker::ensure != 'absent' {
-    $ensure = $docker::version
+    $ensure = '20.10.10-3.el7'
   } else {
     $ensure = $docker::ensure
   }
