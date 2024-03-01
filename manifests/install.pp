@@ -20,7 +20,6 @@
 #
 class docker::install (
   Optional[String] $version                        = $docker::version,
-  Optional[String] $cli_version                    = $docker::cli_version,
   Optional[String] $nuget_package_provider_version = $docker::nuget_package_provider_version,
   Optional[String] $docker_msft_provider_version   = $docker::docker_msft_provider_version,
   Optional[String] $docker_ee_package_name         = $docker::docker_ee_package_name,
@@ -53,19 +52,23 @@ class docker::install (
       }
       case $docker::package_source {
         /docker-engine/ : {
-          package('docker', stdlib::merge($docker_hash, {
+          ensure_resource('package', 'docker', stdlib::merge($docker_hash, {
                 ensure => $ensure,
                 source => $docker::package_source,
                 name   => $docker::docker_engine_package_name,
           }))
         }
         /docker-ce/ : {
-          package { 'docker':
-            ensure          => $ensure,
-            source          => $docker::package_source,
-            install_options => $docker::repo_opt,
-            name            => $docker::docker_ce_package_name
-          }
+          ensure_resource('package', 'docker', stdlib::merge($docker_hash, {
+                ensure => $ensure,
+                source => $docker::package_source,
+                name   => $docker::docker_ce_package_name,
+          }))
+          ensure_resource('package', 'docker-ce-cli', stdlib::merge($docker_hash, {
+                ensure => $ensure,
+                source => $docker::package_source,
+                name   => $docker::docker_ce_cli_package_name,
+          }))
         }
         default : {
           # Empty
@@ -77,7 +80,10 @@ class docker::install (
               ensure => $ensure,
               name   => $docker::docker_package_name,
         }))
-
+        ensure_resource('package', 'docker-ce-cli', stdlib::merge($docker_hash, {
+                ensure => $ensure,
+                name   => $docker::docker_ce_cli_package_name,
+          }))
         if $ensure == 'absent' {
           ensure_resource('package', $dependent_packages, {
               ensure => $ensure,
