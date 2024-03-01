@@ -60,11 +60,11 @@ class docker::install (
           }))
         }
         /docker-ce/ : {
-          package('docker', stdlib::merge($docker_hash, {
-                ensure => $ensure,
-                source => $docker::package_source,
-                name   => $docker::docker_ce_package_name,
-          }))
+          package { $docker::docker_ce_package_name:
+            ensure          => $ensure,
+            source          => $docker::package_source,
+            install_options => $docker::repo_opt,
+          }
         }
         default : {
           # Empty
