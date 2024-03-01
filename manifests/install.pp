@@ -60,10 +60,11 @@ class docker::install (
           }))
         }
         /docker-ce/ : {
-          package { $docker::docker_ce_package_name:
+          package { 'docker':
             ensure          => $ensure,
             source          => $docker::package_source,
             install_options => $docker::repo_opt,
+            name            => $docker::docker_ce_package_name
           }
         }
         default : {
