@@ -8,7 +8,6 @@ def get_defaults(_facts)
   curl_ensure                       = true
   default_gateway                   = :undef
   default_gateway_ipv6              = :undef
-  cli_version                       = :undef
   dm_basesize                       = :undef
   dm_blkdiscard                     = :undef
   dm_blocksize                      = :undef

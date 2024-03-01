@@ -2,7 +2,6 @@
 #
 class docker::params {
   $version                           = undef
-  $cli_version                       = undef
   $ensure                            = present
   $docker_ce_start_command           = 'dockerd'
   $docker_ce_package_name            = 'docker-ce'
