@@ -53,14 +53,14 @@ class docker::install (
       }
       case $docker::package_source {
         /docker-engine/ : {
-          ensure_resource('package', 'docker', stdlib::merge($docker_hash, {
+          package('docker', stdlib::merge($docker_hash, {
                 ensure => $ensure,
                 source => $docker::package_source,
                 name   => $docker::docker_engine_package_name,
           }))
         }
         /docker-ce/ : {
-          ensure_resource('package', 'docker', stdlib::merge($docker_hash, {
+          package('docker', stdlib::merge($docker_hash, {
                 ensure => $ensure,
                 source => $docker::package_source,
                 name   => $docker::docker_ce_package_name,
